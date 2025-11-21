@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Inter, Montserrat, Parisienne } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
@@ -81,6 +82,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <GoogleAnalytics gaId="G-PL27T4NPPR" /> 
       </body>
     </html>
   );
