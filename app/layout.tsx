@@ -55,7 +55,7 @@ export default function RootLayout({
       latitude: 33.97962, 
       longitude: 6.8159084, 
     },
-    url: 'https://www.barber-co.com', 
+    url: 'https://barber-coo.vercel.app/', 
     telephone: '+212661217511',
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday', 'Sunday'], opens: '10:00', closes: '23:30' },
@@ -70,11 +70,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <meta name="google-site-verification" content="0d3VZ04WmA9YvCosF0OJE0SC9rBbI4cdyeH9rCI0mqI" />
       </head>
-
-      {/* 2. AJOUT DE suppressHydrationWarning
-          Cela évite les erreurs causées par les extensions Chrome (ColorZilla, etc.)
-          qui peuvent ralentir le rendu initial. */}
       <body 
         suppressHydrationWarning={true}
         className={`${inter.variable} ${montserrat.variable} ${parisienne.variable} font-sans bg-black text-off-white`}
