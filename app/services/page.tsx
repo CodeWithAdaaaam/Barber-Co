@@ -2,17 +2,15 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Métadonnées SEO optimisées pour les services à Rabat
 export const metadata: Metadata = {
   title: 'Services & Tarifs - Barbier Rabat',
   description: 'Découvrez la liste complète de nos services et tarifs. De la coupe homme classique à la taille de barbe, en passant par les soins et colorations. Barbier Co. Rabat.',
 };
 
-// --- Définition de la structure des données pour une maintenance facile ---
 type Service = {
   name: string;
   price: number;
-  isStartingPrice?: boolean; // Pour les prix "à partir de"
+  isStartingPrice?: boolean; 
 };
 
 type ServiceCategory = {
@@ -86,7 +84,6 @@ const serviceData: ServiceCategory[] = [
   },
 ];
 
-// --- Données pour les Packs (séparées pour un style différent) ---
 type Pack = {
     name: string;
     price: number;
@@ -98,28 +95,6 @@ const packData: Pack[] = [
     { name: "SILVER", price: 350, items: ["Coupe Barbe", "Soins de Cheveux", "Soin de Visage Classique"]},
     { name: "GOLD", price: 900, items: ["Coupe Barbe", "Épilation Visage Complet", "Soin Académie", "Protéine"]},
 ];
-
-const barbersData = [
-  {
-    name: 'Mohammed',
-    title: 'Barbier Fondateur & Expert Dégradé',
-    imageUrl: '/images/barbers/mohammed.webp',
-    bio: "Avec plus de 10 ans d'expérience dans les meilleurs barber shops, Mohammed est un maître du dégradé américain, une coupe homme très demandée à Rabat. Sa précision et sa créativité en font le choix idéal...",
-  },
-  {
-    name: 'Youssef',
-    title: 'Spécialiste Barbe & Soins Traditionnels',
-    imageUrl: '/images/barbers/youssef.webp',
-    bio: "Youssef est le gardien de l'art du rasage traditionnel. Expert en taille de barbe et en soins du visage, il offre une expérience relaxante et un résultat impeccable.",
-  },
-  {
-    name: 'Amine',
-    title: 'Maître des Coupes Classiques & Gentleman',
-    imageUrl: '/images/barbers/amine.webp',
-    bio: "Pour une coupe gentleman intemporelle ou un style classique parfaitement exécuté, Amine est votre homme. Son souci du détail garantit une élégance sans faille.",
-  },
-];
-
 
 // --- Le Composant de la Page ---
 export default function ServicesPage() {
@@ -135,7 +110,7 @@ export default function ServicesPage() {
           </p>
         </div>
 
-        {/* Grille des services */}
+
         <div className="space-y-16">
           {serviceData.map((category) => (
             <div key={category.title}>
@@ -182,35 +157,10 @@ export default function ServicesPage() {
             </div>
         </div>
 
-        <div className="mt-24">
-            <div className="text-center mb-12">
-                <h2 className="text-4xl font-heading uppercase tracking-wider text-gold">Rencontrez Nos Experts</h2>
-                <p className="text-sm text-white/70">Mettez votre style entre les mains de vrais professionnels.</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                {barbersData.map((barber) => (
-                    <div key={barber.name} className="bg-anthracite rounded-lg p-6 text-center flex flex-col items-center shadow-lg border border-transparent hover:border-gold/50 transition-colors">
-                        <div className="relative h-40 w-40 mb-5">
-                            <Image
-                                src={barber.imageUrl}
-                                alt={`Portrait de ${barber.name}, barbier chez Barber Co.`}
-                                fill
-                                sizes="160px"
-                                style={{ objectFit: 'cover' }}
-                                className="rounded-full border-4 border-anthracite-dark"
-                            />
-                        </div>
-                        <h3 className="text-2xl font-heading text-gold">{barber.name}</h3>
-                        <h4 className="text-xs uppercase tracking-wider text-white/60 mb-4">{barber.title}</h4>
-                        <p className="text-white/80 text-sm flex-grow mb-6">{barber.bio}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
         <div className="text-center mt-24 bg-anthracite py-16 rounded-lg">
             <h2 className="text-3xl font-heading text-white mb-4">Prêt à révéler votre meilleur style ?</h2>
             <p className="text-white/70 max-w-xl mx-auto mb-8">
-                Nos experts sont prêts à vous accueillir. La réservation ne prend que 60 secondes.
+                La qualité Barber Co. est notre signature. La réservation ne prend que 60 secondes.
             </p>
             <Link 
                 href="/booking" 

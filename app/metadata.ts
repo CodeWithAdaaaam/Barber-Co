@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-const VILLE = "Rabat"; // À remplacer par votre ville
+const VILLE = "Rabat"; 
 
 export const sharedMetadata: Metadata = {
   title: {

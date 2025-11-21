@@ -23,7 +23,7 @@ const HeroSection = () => {
         <div className="flex justify-center">
 
           <Image
-            src="/images/hero-barber.webp"
+            src="/images/Generated1.png"
             alt="Barbier professionnel de Barber Co. Rabat réalisant une coupe homme."
             width={300} 
             height={300}

@@ -4,7 +4,7 @@ const SalonSection = () => {
   return (
     <section className="relative h-[60vh] bg-black flex items-center justify-center text-center">
       <Image
-        src="/images/salon-panoramic.webp" // <-- Placez votre image ici
+        src="/images/Generated3.png" 
         alt="Vue panoramique de l'intérieur moderne du salon Barber Co."
         fill
         style={{ objectFit: 'cover' }}

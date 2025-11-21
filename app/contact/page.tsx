@@ -20,10 +20,8 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Grille principale : Informations à gauche, Carte à droite */}
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
           
-          {/* COLONNE 1: Informations de Contact (prend 2/5 de la largeur) */}
           <div className="lg:col-span-2 bg-black rounded-lg p-8 space-y-8 shadow-lg">
             
             {/* Section Coordonnées */}
@@ -65,16 +63,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* COLONNE 2: Carte Google Maps (prend 3/5 de la largeur) */}
+
           <div className="lg:col-span-3 h-[550px] w-full rounded-lg overflow-hidden shadow-lg">
-            {/* 
-              INSTRUCTIONS POUR LA CARTE GOOGLE MAPS :
-              1. Allez sur Google Maps et recherchez votre adresse.
-              2. Cliquez sur "Partager".
-              3. Allez dans l'onglet "Intégrer une carte".
-              4. Cliquez sur "COPIER LE CONTENU HTML".
-              5. Collez UNIQUEMENT l'URL qui se trouve dans l'attribut `src="..."` de l'iframe ci-dessous.
-            */}
+  
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5376.31552242171!2d-6.818449222843357!3d33.979640973184516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b0bef73d5b5%3A0x8a6cd79a87df5016!2sBarber%20Co.%20Rabat!5e1!3m2!1sfr!2sma!4v1763054027124!5m2!1sfr!2sma"
               height="100%"

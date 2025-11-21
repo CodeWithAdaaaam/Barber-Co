@@ -2,11 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react'; // Icônes pour le hamburger
+import Image from 'next/image';
+import { usePathname } from "next/navigation"; // Import déjà présent, parfait
+import { Menu, X } from 'lucide-react'; 
 
 const Header = () => {
-  // 'useState' pour gérer l'état d'ouverture/fermeture du menu mobile
+  const pathname = usePathname(); // 1. On récupère l'URL actuelle
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // 2. Si l'URL commence par "/admin", on ne retourne RIEN (null)
+  // Cela empêche le header de s'afficher et de cacher ton dashboard
+  if (pathname && pathname.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 p-4 bg-gradient-to-b from-black/70 to-transparent">
@@ -20,16 +28,18 @@ const Header = () => {
             </nav>
 
             <div className="justify-self-center">
-              <Link href="/" className="text-3xl font-heading">
-                <span className="text-gold">BARBER</span>
-                <span className="font-script text-off-white text-4xl"> Co.</span>
+              <Link href="/" aria-label="Page d'accueil de Barber Co.">
+                <Image
+                  src="/BARBER__logo.png" 
+                  alt="Logo Barber Co."
+                  width={230} 
+                  height={60}  
+                  priority={true}  
+                />
               </Link>
             </div>
 
             <div className="flex items-center space-x-8 justify-self-end">
-              <Link href="/login" className="text-sm uppercase tracking-wider hover:text-gold transition-colors">
-                Login
-              </Link>
               <Link 
                 href="/booking" 
                 className="inline-flex items-center justify-center rounded-md text-sm font-bold uppercase tracking-wider bg-gold text-anthracite hover:bg-gold-light hover:scale-105 transition-all h-11 px-8"
@@ -40,10 +50,15 @@ const Header = () => {
         </div>
 
         <div className="md:hidden flex justify-between items-center w-full">
-            {/* Logo sur mobile */}
-            <Link href="/" className="text-2xl font-heading z-50">
-                <span className="text-gold">BARBER</span>
-                <span className="font-script text-off-white text-3xl"> Co.</span>
+            {/* Logo sur mobile  */}
+            <Link href="/" aria-label="Page d'accueil de Barber Co." className="z-50">
+              <Image
+                src="/BARBER__logo.png" 
+                alt="Logo Barber Co."
+                width={120} 
+                height={50}
+                priority
+              />
             </Link>
 
             {/* Bouton Hamburger */}

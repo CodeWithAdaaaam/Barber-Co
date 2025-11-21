@@ -8,53 +8,44 @@ export const metadata: Metadata = {
   description: 'Découvrez nos coupes homme, dégradés, et tailles de barbe réalisées par nos barbiers experts à Rabat. Inspirez-vous pour votre prochain style.',
 };
 
-// --- GESTION DES DONNÉES DE LA GALERIE ---
-// Pour ajouter une image, ajoutez simplement un nouvel objet à ce tableau.
-// C'est la seule partie du code que vous aurez à modifier pour mettre à jour la galerie.
+
 const galleryImages = [
   {
     id: 1,
-    src: '/images/gallery/coupe-01.webp', // Assurez-vous que l'image existe à cet emplacement
+    src: '/images/gallery/coupe-01.webp',
     alt: 'Coupe homme dégradé à blanc avec traçage de barbe, réalisée par Mohammed, barbier expert chez Barber Co. Rabat.',
     style: 'Dégradé à blanc',
-    barber: 'Mohammed',
   },
   {
     id: 2,
     src: '/images/gallery/coupe-02.webp',
     alt: 'Taille de barbe classique avec contours précis par Youssef.',
     style: 'Barbe Classique',
-    barber: 'Youssef',
   },
   {
     id: 3,
     src: '/images/gallery/coupe-03.webp',
     alt: 'Coiffure Taper Fade sur cheveux bouclés, par Amine.',
     style: 'Taper Fade',
-    barber: 'Amine',
   },
   {
     id: 4,
     src: '/images/gallery/coupe-04.webp',
     alt: 'Style Gentleman sur cheveux mi-longs, coiffé au brushing.',
     style: 'Coupe Gentleman',
-    barber: 'Mohammed',
   },
   {
     id: 5,
     src: '/images/gallery/coupe-05.webp',
     alt: 'Coloration cheveux homme blond platine par Barber Co. Rabat.',
     style: 'Coloration Platine',
-    barber: 'Youssef',
   },
   {
     id: 6,
     src: '/images/gallery/coupe-06.webp',
     alt: 'Combo coupe de cheveux et barbe soignée, style moderne.',
     style: 'Combo Coupe & Barbe',
-    barber: 'Amine',
   },
-  // Ajoutez autant d'images que vous le souhaitez ici...
 ];
 
 
@@ -88,7 +79,6 @@ export default function GaleriePage() {
               {/* Overlay qui apparaît au survol */}
               <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <h3 className="text-lg font-bold text-gold">{image.style}</h3>
-                <p className="text-sm text-white/80">Par {image.barber}</p>
               </div>
             </div>
           ))}
