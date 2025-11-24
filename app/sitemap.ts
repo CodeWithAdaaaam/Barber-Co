@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://barber-coo.vercel.app'; 
+  const baseUrl = 'https://barber-coo.vercel.app';
 
   return [
     {
@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
      {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/galerie`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.7,
