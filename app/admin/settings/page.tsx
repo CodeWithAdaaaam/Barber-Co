@@ -73,20 +73,37 @@ export default function SettingsPage() {
 
   // 3. Sauvegarder (Création OU Modification)
   const handleSaveBarber = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            if (editingBarberId) {
-                await updateBarber(editingBarberId, formDataBarber);
-            } else {
-                await addBarber(formDataBarber);
-            }
-            setShowBarberModal(false);
-            load();
-        } catch (error) {
-            console.error(error);
-            alert("Erreur lors de l'enregistrement");
+    e.preventDefault();
+
+    // 1. Validation de sécurité : on vérifie que le nom existe
+    if (!formDataBarber.full_name) {
+        alert("Le nom du coiffeur est obligatoire.");
+        return;
+    }
+
+    try {
+        if (editingBarberId) {
+            // En mode édition, Partial<Barber> est accepté par updateBarber
+            await updateBarber(editingBarberId, formDataBarber);
+        } else {
+            // En mode création, addBarber exige un objet complet.
+            // On reconstruit l'objet pour garantir à TypeScript que les types sont bons.
+            await addBarber({
+                full_name: formDataBarber.full_name, // On est sûr qu'il existe grâce au if du début
+                display_order: formDataBarber.display_order || 1,
+                bio: formDataBarber.bio || '',
+                instagram_link: formDataBarber.instagram_link || '',
+                avatar_url: formDataBarber.avatar_url || ''
+            });
         }
-    };
+        
+        setShowBarberModal(false);
+        load();
+    } catch (error) {
+        console.error(error);
+        alert("Erreur lors de l'enregistrement");
+    }
+  };
 
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
