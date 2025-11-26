@@ -72,33 +72,36 @@ export default function SettingsPage() {
   };
 
   // 3. Sauvegarder (Création OU Modification)
+  // --- HANDLER CORRIGÉ POUR TYPESCRIPT ---
   const handleSaveBarber = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Validation de sécurité : on vérifie que le nom existe
+    // 1. Vérification de sécurité
     if (!formDataBarber.full_name) {
-        alert("Le nom du coiffeur est obligatoire.");
+        alert("Le nom est obligatoire");
         return;
     }
 
     try {
         if (editingBarberId) {
-            // En mode édition, Partial<Barber> est accepté par updateBarber
+            // Mode UPDATE
             await updateBarber(editingBarberId, formDataBarber);
         } else {
-            // En mode création, addBarber exige un objet complet.
-            // On reconstruit l'objet pour garantir à TypeScript que les types sont bons.
-            await addBarber({
-                full_name: formDataBarber.full_name, // On est sûr qu'il existe grâce au if du début
+            // Mode CRÉATION
+            // On crée un objet propre et on FORCE le type du nom avec "as string"
+            const newBarberData = {
+                full_name: formDataBarber.full_name as string, // <--- C'est ça qui corrige l'erreur
                 display_order: formDataBarber.display_order || 1,
                 bio: formDataBarber.bio || '',
                 instagram_link: formDataBarber.instagram_link || '',
                 avatar_url: formDataBarber.avatar_url || ''
-            });
+            };
+
+            await addBarber(newBarberData);
         }
         
         setShowBarberModal(false);
-        load();
+        load(); // Recharger la liste
     } catch (error) {
         console.error(error);
         alert("Erreur lors de l'enregistrement");
