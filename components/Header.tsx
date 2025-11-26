@@ -30,7 +30,7 @@ const Header = () => {
             <div className="justify-self-center">
               <Link href="/" aria-label="Page d'accueil de Barber Co.">
                 <Image
-                  src="/BARBER__logo.png" 
+                  src="/images/BARBER__logo.png" 
                   alt="Logo Barber Co."
                   width={230} 
                   height={60}  
