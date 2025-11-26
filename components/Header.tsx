@@ -44,7 +44,7 @@ const Header = () => {
                 href="/booking" 
                 className="inline-flex items-center justify-center rounded-md text-sm font-bold uppercase tracking-wider bg-gold text-anthracite hover:bg-gold-light hover:scale-105 transition-all h-11 px-8"
               >
-                Book appointment
+                Prendre un Rendez-Vous
               </Link>
             </div>
         </div>

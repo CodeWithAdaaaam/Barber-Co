@@ -35,7 +35,7 @@ const Footer = () => {
           
           {/* Horaires */}
           <div>
-            <h3 className="font-bold text-gold uppercase tracking-widest mb-4">Hours</h3>
+            <h3 className="font-bold text-gold uppercase tracking-widest mb-4">Heures d'ouverture</h3>
             <ul className="space-y-2">
               <li><span className="font-semibold">Lun-Dim:</span> 10h00-23h30</li>
             </ul>
@@ -46,7 +46,7 @@ const Footer = () => {
             <h3 className="font-bold text-gold uppercase tracking-widest mb-4">Contact & Menu</h3>
             <ul className="space-y-2">
               <li><Link href="/services" className="hover:text-gold transition-colors">Services</Link></li>
-              <li><Link href="/booking" className="hover:text-gold transition-colors">Book appointment</Link></li>
+              <li><Link href="/booking" className="hover:text-gold transition-colors">Prendre un Rendez-Vous</Link></li>
               <li><a href="tel:+212661217511" className="hover:text-gold">+212 66 12 17 51 1</a></li>
               <li className="text-sm">Rue Bani Jaber, Rabat 10000</li>
             </ul>
@@ -54,7 +54,7 @@ const Footer = () => {
 
           {/* Follow Us */}
           <div>
-            <h3 className="font-bold text-gold uppercase tracking-widest mb-4">Follow Us</h3>
+            <h3 className="font-bold text-gold uppercase tracking-widest mb-4">Suivez-Nous</h3>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/barber.co.rabat?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white/70 hover:text-gold transition-colors"><Instagram /></a>
               <a href="https://wa.me/212661217511" target="_blank" rel="noopener noreferrer" aria-label="Whatsapp" className="text-white/70 hover:text-gold transition-colors"><MessageCircle  /></a>

@@ -13,7 +13,7 @@ const SalonSection = () => {
       />
       <div className="relative z-10 p-4">
         <h2 className="text-4xl md:text-5xl font-heading text-white">
-          The <span className="text-gold font-bold">salon</span> — Make yourself at home
+        Le <span className="text-gold font-bold">Salon</span> — Faites comme chez vous
         </h2>
       </div>
     </section>

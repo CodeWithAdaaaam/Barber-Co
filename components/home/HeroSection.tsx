@@ -15,7 +15,7 @@ const HeroSection = () => {
              Votre Style, Notre Signature. Découvrez l'expérience Barber Co.
           </h2>
           <Button asChild size="lg" className="mt-8">
-            <Link href="/services">Learn more</Link>
+            <Link href="/booking">Prendre un Rendez-Vous</Link>
           </Button>
         </div>
         

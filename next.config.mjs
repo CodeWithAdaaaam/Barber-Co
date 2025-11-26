@@ -1,5 +1,16 @@
 /**@type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        // Remplace par TON domaine supabase (visible dans l'URL de tes images)
+        hostname: 'gollvdzohjdpiiutkcnt.supabase.co', 
+        port: '',
+        pathname: '/storage/v1/object/**',
+      },
+    ],
+  },
   async headers() {
     return [
       {

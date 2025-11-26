@@ -18,12 +18,12 @@ const ServicesIntroSection = () => {
         </div>
         
         <div className="text-white text-center md:text-left">
-          <h2 className="text-3xl lg:text-5xl font-heading font-bold">Good Hair Days Start Here!</h2>
+          <h2 className="text-3xl lg:text-5xl font-heading font-bold">Les beaux jours capillaires commencent ici !</h2>
           <p className="mt-4 text-white/80 leading-relaxed">
             Chaque barbier de notre salon à Rabat est un expert en coiffure masculine. Que ce soit pour une coupe homme moderne ou une taille de barbe précise, nous maîtrisons notre art.
           </p>
           <Button asChild variant="outline" className="mt-8">
-            <Link href="/services">See Services →</Link>
+            <Link href="/services">Voir nos Services →</Link>
           </Button>
         </div>
       </div>

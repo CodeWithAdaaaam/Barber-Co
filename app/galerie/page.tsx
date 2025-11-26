@@ -1,104 +1,84 @@
-import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import { getBarbers } from '@/lib/api';
+import { Instagram } from 'lucide-react';
 
-// Métadonnées SEO
-export const metadata: Metadata = {
-  title: 'Galerie de Réalisations - Barber Co. Rabat',
-  description: 'Découvrez nos coupes homme, dégradés, et tailles de barbe réalisées par nos barbiers experts à Rabat. Inspirez-vous pour votre prochain style.',
-};
+// On force le rafraîchissement des données (Dynamic)
+export const revalidate = 0; 
 
+export default async function GaleriePage() {
+  const barbers = await getBarbers();
 
-const galleryImages = [
-  {
-    id: 1,
-    src: '/images/gallery/coupe-01.webp',
-    alt: 'Coupe homme dégradé à blanc avec traçage de barbe, réalisée par Mohammed, barbier expert chez Barber Co. Rabat.',
-    style: 'Dégradé à blanc',
-  },
-  {
-    id: 2,
-    src: '/images/gallery/coupe-02.webp',
-    alt: 'Taille de barbe classique avec contours précis par Youssef.',
-    style: 'Barbe Classique',
-  },
-  {
-    id: 3,
-    src: '/images/gallery/coupe-03.webp',
-    alt: 'Coiffure Taper Fade sur cheveux bouclés, par Amine.',
-    style: 'Taper Fade',
-  },
-  {
-    id: 4,
-    src: '/images/gallery/coupe-04.webp',
-    alt: 'Style Gentleman sur cheveux mi-longs, coiffé au brushing.',
-    style: 'Coupe Gentleman',
-  },
-  {
-    id: 5,
-    src: '/images/gallery/coupe-05.webp',
-    alt: 'Coloration cheveux homme blond platine par Barber Co. Rabat.',
-    style: 'Coloration Platine',
-  },
-  {
-    id: 6,
-    src: '/images/gallery/coupe-06.webp',
-    alt: 'Combo coupe de cheveux et barbe soignée, style moderne.',
-    style: 'Combo Coupe & Barbe',
-  },
-];
+  // Images statiques pour la galerie (Coupes)
+  const galleryImages = [
+    '/images/IMG_0312.jpg', '/images/IMG_1309.jpg', '/images/IMG_5351.jpg'
+  ];
 
-
-// --- LE COMPOSANT DE LA PAGE ---
-export default function GaleriePage() {
   return (
-    <div className="bg-anthracite min-h-screen pt-32 pb-24">
-      <div className="container mx-auto px-4">
-
-        {/* En-tête de la page */}
+    <div className="bg-black min-h-screen text-white pt-32 pb-20">
+      
+      <section className="container mx-auto px-4 mb-24">
         <div className="text-center mb-16">
-          <h1 className="text-5xl lg:text-6xl font-heading font-bold text-gold">Nos Réalisations</h1>
-          <p className="mt-4 text-white/70 max-w-2xl mx-auto">
-            L'art et la précision dans chaque coupe. Découvrez le savoir-faire de nos barbiers à travers nos derniers chefs-d'œuvre.
-          </p>
-        </div>
-
-        {/* Grille de la galerie */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {galleryImages.map((image) => (
-            <div key={image.id} className="group relative overflow-hidden rounded-lg aspect-square shadow-lg">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                style={{ objectFit: 'cover' }}
-                className="transition-transform duration-300 ease-in-out group-hover:scale-110"
-                quality={75}
-              />
-              {/* Overlay qui apparaît au survol */}
-              <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold text-gold">{image.style}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Appel à l'action */}
-        <div className="text-center mt-20">
-            <h2 className="text-3xl font-heading text-white mb-4">Inspiré ? Réservez votre style.</h2>
-            <p className="text-white/70 max-w-xl mx-auto mb-8">
-                Montrez à votre barbier la coupe que vous aimez ou laissez-le vous conseiller pour créer un look qui vous est propre.
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter font-heading text-gold">
+                NOS EXPERTS
+            </h1>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+                Rencontrez l'équipe de passionnés qui prend soin de votre style au quotidien.
             </p>
-            <Link 
-                href="/booking" 
-                className="inline-flex items-center justify-center rounded-md text-lg font-bold uppercase tracking-wider bg-gold text-anthracite hover:bg-gold-light hover:scale-105 transition-all h-14 px-10"
-            >
-                Réserver Maintenant
-            </Link>
         </div>
 
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {barbers.map((barber) => (
+                <div key={barber.id} className="group bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-gold transition-all duration-300">
+                    {/* Photo du Coiffeur */}
+                    <div className="relative h-80 w-full overflow-hidden">
+                        <Image
+                            src={barber.avatar_url || '/images/BARBER__logo.png'} 
+                            alt={barber.full_name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                    </div>
+                    
+                    {/* Infos */}
+                    <div className="p-6 text-center">
+                        <h3 className="text-2xl font-bold mb-2 text-white">{barber.full_name}</h3>
+                        <p className="text-gray-400 text-sm mb-6 min-h-[60px]">
+                            {barber.bio || "Expert coiffeur barbier passionné par son métier."}
+                        </p>
+                        
+                        {barber.instagram_link && (
+                            <a 
+                                href={barber.instagram_link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-gold border border-gold px-6 py-2 rounded-full hover:bg-gold hover:text-black transition-colors font-bold text-sm"
+                            >
+                                <Instagram size={16} /> Suivre sur Insta
+                            </a>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </div>
+      </section>
+
+      {/* --- SECTION 2: RÉALISATIONS (Statique) --- */}
+      <section className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center text-white font-heading">
+            GALERIE DE STYLES
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {/* Tu peux remettre tes images de galerie ici */}
+            {/* Pour l'exemple je mets des placeholders gris */}
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+            <div className="aspect-square bg-zinc-800 rounded-lg"></div>
+        </div>
+      </section>
+
     </div>
   );
 }

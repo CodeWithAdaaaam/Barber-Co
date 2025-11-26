@@ -27,6 +27,9 @@ export interface Barber {
   full_name: string;
   display_order: number;
   avatar_url?: string;
+  is_active?: boolean;
+  bio?: string;          
+  instagram_link?: string;
 }
 
 export interface Service {
@@ -255,16 +258,19 @@ export const toggleBarberStatus = async (id: string, isActive: boolean) => {
   if (error) throw error;
 };
 
-export const addBarber = async (barber: { full_name: string; display_order: number }) => {
+export const addBarber = async (barber: { full_name: string; display_order: number; bio?: string; instagram_link?: string; avatar_url?: string }) => {
   const { error } = await supabase.from('barbers').insert([{
     full_name: barber.full_name,
     display_order: barber.display_order,
+    bio: barber.bio,                     // <--- NOUVEAU
+    instagram_link: barber.instagram_link, // <--- NOUVEAU
+    avatar_url: barber.avatar_url,       // <--- NOUVEAU
     is_active: true
   }]);
   if (error) throw error;
 };
-
 // 6. Ajouter un nouveau Service
+
 export const addService = async (service: { title: string; duration: number; price: number; color_code: string }) => {
   const { error } = await supabase.from('services').insert([service]);
   if (error) throw error;
@@ -392,3 +398,41 @@ export const deleteAppointment = async (id: string) => {
   if (error) throw error;
 };
 
+
+export async function updateBarber(id: string, updates: Partial<Barber>) {
+  const { data, error } = await supabase
+    .from('barbers')
+    .update(updates)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return data;
+}
+
+export async function uploadBarberPhoto(file: File) {
+  // 1. On crée un nom unique pour éviter d'écraser une autre image (timestamp + nom)
+  const fileName = `${Date.now()}-${file.name.replace(/\s/g, '_')}`;
+
+  // 2. Upload vers le bucket "images"
+  const { data, error } = await supabase
+    .storage
+    .from('images') // Assure-toi que ton bucket s'appelle bien "images"
+    .upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false
+    });
+
+  if (error) {
+    console.error("Erreur upload Supabase:", error);
+    throw error;
+  }
+
+  // 3. On récupère l'URL publique
+  const { data: publicUrlData } = supabase
+    .storage
+    .from('images')
+    .getPublicUrl(fileName);
+
+  return publicUrlData.publicUrl;
+}
