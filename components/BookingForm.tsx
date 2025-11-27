@@ -191,24 +191,39 @@ export default function BookingForm({ services, barbers }: BookingFormProps) {
             <div className="animate-fade-in pt-8">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {barbers.map(barber => (
-                    <button 
-                        key={barber.id}
-                        onClick={() => { setSelectedBarber(barber); setStep(4); }}
-                        className="p-6 rounded-xl bg-black border border-zinc-800 hover:border-gold transition-all flex flex-col items-center gap-4 group"
-                    >
-                        <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-gold group-hover:bg-zinc-900 border-2 border-transparent group-hover:border-gold transition-all">
-                            {barber.full_name.charAt(0)}
-                        </div>
-                        <span className="font-bold text-lg group-hover:text-gold transition-colors">{barber.full_name}</span>
-                    </button>
-                ))}
-                <button 
-                    onClick={() => { setSelectedBarber(barbers[0]); setStep(4); }}
-                    className="p-6 rounded-xl bg-black border border-zinc-800 border-dashed hover:border-gold transition-all flex flex-col items-center gap-4 group opacity-70 hover:opacity-100"
-                >
-                    <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center text-2xl font-bold text-gray-500">?</div>
-                    <span className="font-bold text-lg">Premier dispo</span>
-                </button>
+                  <button 
+                      key={barber.id}
+                      onClick={() => { setSelectedBarber(barber); setStep(4); }}
+                      className="p-6 rounded-xl bg-black border border-zinc-800 hover:border-gold transition-all flex flex-col items-center gap-4 group"
+                  >
+                      {/* J'ai ajouté 'overflow-hidden' pour que l'image reste bien ronde */}
+                      <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-gold group-hover:bg-zinc-900 border-2 border-transparent group-hover:border-gold transition-all overflow-hidden relative">
+                          
+                          {/* LOGIQUE D'AFFICHAGE DE L'IMAGE */}
+                          {barber.avatar_url ? (
+                              <img 
+                                  src={barber.avatar_url} 
+                                  alt={barber.full_name} 
+                                  className="w-full h-full object-cover" // object-cover assure que l'image remplit tout le cercle sans être déformée
+                              />
+                          ) : (
+                              // S'il n'y a pas d'image, on garde l'initiale
+                              barber.full_name.charAt(0)
+                          )}
+                          
+                      </div>
+                      <span className="font-bold text-lg group-hover:text-gold transition-colors">{barber.full_name}</span>
+                  </button>
+              ))}
+
+              {/* Bouton Premier dispo (inchangé) */}
+              <button 
+                  onClick={() => { setSelectedBarber(barbers[0]); setStep(4); }}
+                  className="p-6 rounded-xl bg-black border border-zinc-800 border-dashed hover:border-gold transition-all flex flex-col items-center gap-4 group opacity-70 hover:opacity-100"
+              >
+                  <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center text-2xl font-bold text-gray-500">?</div>
+                  <span className="font-bold text-lg">Premier dispo</span>
+              </button>
               </div>
             </div>
           )}
